@@ -38,51 +38,51 @@ var move_down := false
 
 
 func _ready() -> void:
-    # We want the camera to move when we set position
-    set_drag_horizontal_enabled(false)
-    set_drag_vertical_enabled(false)
+	# We want the camera to move when we set position
+	set_drag_horizontal_enabled(false)
+	set_drag_vertical_enabled(false)
 
 ## Check for events detected by _unhandled_input and handle them
 func _process(delta: float) -> void:
-    var motion := Vector2.ZERO
-    if keyboard_pan:
-        if move_left:
-            motion += Vector2.LEFT
-        if move_up:
-            motion += Vector2.UP
-        if move_right:
-            motion += Vector2.RIGHT
-        if move_down:
-            motion += Vector2.DOWN
+	var motion := Vector2.ZERO
+	if keyboard_pan:
+		if move_left:
+			motion += Vector2.LEFT
+		if move_up:
+			motion += Vector2.UP
+		if move_right:
+			motion += Vector2.RIGHT
+		if move_down:
+			motion += Vector2.DOWN
 
-    var mouse_pos := get_local_mouse_position()
-    # Pan camera when the mouse has been moved to the window edges
-    if mouse_edge_pan:
-        var rect := get_viewport().get_visible_rect()
-        var margin_rect = rect.grow(-edge_margin)
-        margin_rect.position -= rect.size / 2
-        if not margin_rect.has_point(mouse_pos):
-            motion += margin_rect.get_center().direction_to(mouse_pos)
+	var mouse_pos := get_local_mouse_position()
+	# Pan camera when the mouse has been moved to the window edges
+	if mouse_edge_pan:
+		var rect := get_viewport().get_visible_rect()
+		var margin_rect = rect.grow(-edge_margin)
+		margin_rect.position -= rect.size / 2
+		if not margin_rect.has_point(mouse_pos):
+			motion += margin_rect.get_center().direction_to(mouse_pos)
 
-    motion *= (pan_speed * (1 / zoom.x)) * delta / Engine.time_scale
+	motion *= (pan_speed * (1 / zoom.x)) * delta / Engine.time_scale
 
-    if mouse_drag_pan and dragging:
-        motion = prev_mouse_pos - mouse_pos
+	if mouse_drag_pan and dragging:
+		motion = prev_mouse_pos - mouse_pos
 
-    # Update position of the camera.
-    position += motion
-    clamp_position_to_limits()
+	# Update position of the camera.
+	position += motion
+	clamp_position_to_limits()
 
-    if use_mouse_wheel:
-        if Input.is_action_just_released(zoom_in_action):
-            zoom += Vector2(zoom_speed, zoom_speed)
-        if Input.is_action_just_released(zoom_out_action):
-            zoom -= Vector2(zoom_speed, zoom_speed)
+	if use_mouse_wheel:
+		if Input.is_action_just_released(zoom_in_action):
+			zoom += Vector2(zoom_speed, zoom_speed)
+		if Input.is_action_just_released(zoom_out_action):
+			zoom -= Vector2(zoom_speed, zoom_speed)
 
-        zoom.x = clampf(zoom.x, max_zoom, min_zoom)
-        zoom.y = zoom.x
+		zoom.x = clampf(zoom.x, max_zoom, min_zoom)
+		zoom.y = zoom.x
 
-    prev_mouse_pos = get_local_mouse_position()
+		prev_mouse_pos = get_local_mouse_position()
 
 ## Check for any unhandled input events and take note of them
 ##
@@ -92,37 +92,37 @@ func _process(delta: float) -> void:
 ## NOTE: This is done here to ensure that we only consume input events if no other node does.
 ## i.e. the camera won't move if the player is moving through menus
 func _unhandled_input(event: InputEvent) -> void:
-    # TODO: Change to input action
-    if event.is_action(drag_action):
-        dragging = event.is_pressed()
-        return
+	# TODO: Change to input action
+	if event.is_action(drag_action):
+		dragging = event.is_pressed()
+		return
 
-    # Transform a key change event into a "pressed" flag.
-    # We do it this way because we're checking against an InputEvent, not Input
-    if event.is_action_pressed(move_left_action):
-        move_left = true
-    if event.is_action_pressed(move_up_action):
-        move_up = true
-    if event.is_action_pressed(move_right_action):
-        move_right = true
-    if event.is_action_pressed(move_down_action):
-        move_down = true
-    if event.is_action_released(move_left_action):
-        move_left = false
-    if event.is_action_released(move_up_action):
-        move_up = false
-    if event.is_action_released(move_right_action):
-        move_right = false
-    if event.is_action_released(move_down_action):
-        move_down = false
+	# Transform a key change event into a "pressed" flag.
+	# We do it this way because we're checking against an InputEvent, not Input
+	if event.is_action_pressed(move_left_action):
+		move_left = true
+	if event.is_action_pressed(move_up_action):
+		move_up = true
+	if event.is_action_pressed(move_right_action):
+		move_right = true
+	if event.is_action_pressed(move_down_action):
+		move_down = true
+	if event.is_action_released(move_left_action):
+		move_left = false
+	if event.is_action_released(move_up_action):
+		move_up = false
+	if event.is_action_released(move_right_action):
+		move_right = false
+	if event.is_action_released(move_down_action):
+		move_down = false
 
 ## Clamp the camera position to within the camera limits
 ##
 ## This fixes an issue where the camera can get "stuck" when in corners. I assume this
 ## is due to stopping all movement when a limit is reached
 func clamp_position_to_limits() -> void:
-    var view_size := get_viewport().get_visible_rect ().size * get_zoom().x
-    var half_width := view_size.x / 2.0
-    var half_height := view_size.y / 2.0
-    position.x = clampf(position.x, limit_left + half_width, limit_right - half_width)
-    position.y = clampf(position.y, limit_top + half_height, limit_bottom - half_height)
+	var view_size := get_viewport().get_visible_rect ().size * get_zoom().x
+	var half_width := view_size.x / 2.0
+	var half_height := view_size.y / 2.0
+	position.x = clampf(position.x, limit_left + half_width, limit_right - half_width)
+	position.y = clampf(position.y, limit_top + half_height, limit_bottom - half_height)
