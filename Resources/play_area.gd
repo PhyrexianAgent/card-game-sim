@@ -16,6 +16,10 @@ class_name PlayArea
 @export var size: Vector2
 # Position of play area
 @export var position: Vector2
+# Set if image or color to be used for area
+@export_enum("Image", "Color") var back_type
+@export var back_image: Image
+@export var back_color: Color
 
 # This is a dummy type variable for however we decide to store player's id (string for now)
 var owner_id: String

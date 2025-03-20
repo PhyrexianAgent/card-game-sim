@@ -15,6 +15,12 @@ const VISIBLE_TO_NONE = 2
 @export var size: Vector2
 # Position of zone when it generates
 @export var position: Vector2
+# Offset for placing cards in the zone (if for whatever reason an offset is required)
+@export var card_placement_offset: Vector2
+# Set if image or color to be used for area
+@export_enum("Image", "Color") var back_type
+@export var back_image: Image
+@export var back_color: Color
 
 # Rect for detecting if player dragged card to this zone (generated when game starts)
 var rect: Rect2
