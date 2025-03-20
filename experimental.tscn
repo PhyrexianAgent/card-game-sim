@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://da5cdkgmn6by"]
+[gd_scene load_steps=3 format=3 uid="uid://da5cdkgmn6by"]
 
 [ext_resource type="Texture2D" uid="uid://dgopf7gyw6ifl" path="res://icon.svg" id="1_ilx5j"]
+[ext_resource type="Script" uid="uid://capwedyv5c53w" path="res://addons/Fantail-Interactive.top_down_camera/td_camera_2d.gd" id="2_sryh6"]
 
 [node name="Experimental" type="Node2D"]
 
@@ -22,3 +23,4 @@ texture = ExtResource("1_ilx5j")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(571, 311)
+script = ExtResource("2_sryh6")

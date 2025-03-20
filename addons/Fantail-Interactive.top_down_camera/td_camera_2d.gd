@@ -74,14 +74,20 @@ func _process(delta: float) -> void:
 	clamp_position_to_limits()
 
 	if use_mouse_wheel:
+		var zooming = false
+		var start_pos = get_local_mouse_position()
 		if Input.is_action_just_released(zoom_in_action):
 			zoom += Vector2(zoom_speed, zoom_speed)
+			zooming = true
 		if Input.is_action_just_released(zoom_out_action):
 			zoom -= Vector2(zoom_speed, zoom_speed)
-
+			zooming = true
+			
 		zoom.x = clampf(zoom.x, max_zoom, min_zoom)
 		zoom.y = zoom.x
-
+		if zooming:
+			position += start_pos - get_local_mouse_position()
+			#print("mouse pos from {0} to {1}".format([start_pos, get_local_mouse_position()]))
 		prev_mouse_pos = get_local_mouse_position()
 
 ## Check for any unhandled input events and take note of them
