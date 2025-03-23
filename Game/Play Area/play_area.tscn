@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://di63sf41c3ahj"]
+
+[ext_resource type="Script" uid="uid://cmcurxiqvwy8v" path="res://Game/Play Area/play_area.gd" id="1_xvjqp"]
+[ext_resource type="Texture2D" uid="uid://cguowuqtm2g66" path="res://Game/Play Area/ColoredSprite.jpg" id="2_du8d7"]
+
+[node name="Play Area" type="Node2D"]
+script = ExtResource("1_xvjqp")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.481789, 0.481789, 0.481789, 1)
+texture = ExtResource("2_du8d7")
