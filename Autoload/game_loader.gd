@@ -7,6 +7,32 @@ const DECK_PATH := "user://Decks"
 # Json format extension
 const JSON_EXTENSION := ".json"
 
+# These are types of things the game loader can instantiate
+enum GameObjects{
+	PLAY_AREA,
+	ZONE
+}
+
+# Base action types that are used for indexing within game rule json files. Note there is some conversion
+# on the user's end to have such indexes for actions be converted to Callables for such funcs. This will
+# be edited as actions sent to server are added/removed.
+enum ServerCardActions{
+	MOVE,
+	FLIP,
+	CREATE_NEW,
+	DELETE,
+	ROTATE
+}
+
+# These are actions zones can do. These will still work with server card actions, but will be built client side
+# mostly unless it is needed for server side.
+enum ZoneActions{
+	CHANGE_Z,
+	MOVE,
+	SHUFFLE
+}
+
+
 # Stores all game rules when game starts. Default rules also go here because when game is exported,
 # the files may be in a form that only resource loader can properly handle.
 var game_rules := []

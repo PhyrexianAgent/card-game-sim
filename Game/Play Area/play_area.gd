@@ -8,5 +8,8 @@ var usable_by_player := false
 
 @onready var background = $Background
 
+func _init() -> void:
+	pass
+
 func _ready() -> void:
 	pass
