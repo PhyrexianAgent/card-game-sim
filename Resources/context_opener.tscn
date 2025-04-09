@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck314wauyxupx"]
+
+[ext_resource type="Script" uid="uid://comdresqwli6t" path="res://Resources/context_opener.gd" id="1_ivgg4"]
+
+[node name="ContextOpener" type="Node"]
+script = ExtResource("1_ivgg4")
