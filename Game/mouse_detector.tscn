@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://mtlfv80qx26g"]
+
+[ext_resource type="Script" uid="uid://cusxtl881qae" path="res://Game/mouse_detector.gd" id="1_nlhuc"]
+
+[node name="Mouse Detector" type="Node"]
+script = ExtResource("1_nlhuc")
