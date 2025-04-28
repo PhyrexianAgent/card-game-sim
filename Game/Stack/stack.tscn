@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdvyujbf2cwl7"]
+
+[ext_resource type="Script" uid="uid://baihh2p2wclbk" path="res://Game/Stack/stack.gd" id="1_7ohvi"]
+[ext_resource type="PackedScene" uid="uid://mtlfv80qx26g" path="res://Game/mouse_detector.tscn" id="2_54t1s"]
+
+[node name="Stack" type="Sprite2D"]
+script = ExtResource("1_7ohvi")
+
+[node name="Mouse Detector" parent="." instance=ExtResource("2_54t1s")]
