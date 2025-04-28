@@ -12,10 +12,15 @@ enum ResizingTypes{
 @export var top: float
 @export var bottom: float
 
+# Current viewport (so I dont have to keep calling get_viewport() repeatingly)
+@onready var viewport := get_viewport()
+
 # Rect which covers where the sprite is on the object. Used to check if point inside rect.
 var rect := Rect2()
 # If true mouse is on object. Will respect z index (objects below mouse with lesser z index have this false)
 var mouse_on := false
+# True if mouse is on the object in some way. Used to determin method to call for mouse detect handler
+var mouse_on_rect := false : set = _set_mouse_on_rect
 
 var rect_area: Sprite2D = null
 
@@ -26,14 +31,27 @@ func _ready() -> void:
 		printerr("Attempted to add mouse detector to a non sprite node (%s). Removing now." % get_parent().name)
 		queue_free()
 	update_rect()
-	print("z index of {0}: {1}".format([get_parent().name, MouseDetectHandler.get_actual_z_index(get_parent())]))
+	#print("z index of {0}: {1}".format([get_parent().name, MouseDetectHandler.get_actual_z_index(get_parent())]))
 	
 
 func _process(delta: float) -> void:
-	pass
+	mouse_on_rect = rect.has_point(viewport.get_mouse_position())
+	update_mouse_on_rect()
+	
+func _set_mouse_on_rect(value: bool) -> void:
+	if value != mouse_on_rect:
+		print("%s" % value)
+	mouse_on_rect = value
+		
+func update_mouse_on_rect() -> void:
+	var rect_has_mouse := rect.has_point(viewport.get_mouse_position())
+	if mouse_on_rect != rect_has_mouse:
+		mouse_on_rect = rect_has_mouse
 	
 # Updates rect for detecting if mouse is on this object
 func update_rect() -> void:
-	var t_size = get_parent().texture.get_size()
-	rect.position = get_parent().position - Vector2(left, top)
+	var parent = get_parent()
+	print(parent.scale)
+	var t_size = parent.texture.get_size() * parent.scale
 	rect.size = t_size - Vector2(left + right, top + bottom)
+	rect.position = get_parent().position - Vector2(left, top) - rect.size / 2
