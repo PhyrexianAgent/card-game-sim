@@ -1,3 +1,25 @@
-[gd_scene format=3 uid="uid://besgat1c0q0no"]
+[gd_scene load_steps=2 format=3 uid="uid://besgat1c0q0no"]
+
+[ext_resource type="PackedScene" uid="uid://cdvyujbf2cwl7" path="res://Game/Stack/stack.tscn" id="1_cx5mc"]
 
 [node name="Experimental" type="Node2D"]
+
+[node name="Stack" parent="." instance=ExtResource("1_cx5mc")]
+position = Vector2(555, 340)
+scale = Vector2(9.05, 7.8)
+
+[node name="Stack2" parent="." instance=ExtResource("1_cx5mc")]
+modulate = Color(1, 0.384314, 1, 1)
+position = Vector2(568, 413)
+scale = Vector2(5.775, 5.8)
+
+[node name="Stack4" parent="." instance=ExtResource("1_cx5mc")]
+modulate = Color(0.861838, 0.600329, 0.662223, 1)
+position = Vector2(650, 319)
+scale = Vector2(5.775, 5.8)
+
+[node name="Stack3" parent="Stack4" instance=ExtResource("1_cx5mc")]
+modulate = Color(0.53203, 0.758576, 0.428009, 1)
+position = Vector2(-7.09957, 25.8621)
+
+[node name="Node" type="Node" parent="."]

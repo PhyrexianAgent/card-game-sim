@@ -40,7 +40,11 @@ func _process(delta: float) -> void:
 	
 func _set_mouse_on_rect(value: bool) -> void:
 	if value != mouse_on_rect:
-		print("%s" % value)
+		print("Node {0} = {1}".format([get_parent().name, value]))
+		if value:
+			MouseDetectHandler.add_under_mouse(self)
+		else:
+			MouseDetectHandler.remove_under_mouse(self)
 	mouse_on_rect = value
 		
 func update_mouse_on_rect() -> void:
@@ -51,7 +55,7 @@ func update_mouse_on_rect() -> void:
 # Updates rect for detecting if mouse is on this object
 func update_rect() -> void:
 	var parent = get_parent()
-	print(parent.scale)
-	var t_size = parent.texture.get_size() * parent.scale
+	var t_size = parent.texture.get_size() * parent.global_scale
 	rect.size = t_size - Vector2(left + right, top + bottom)
-	rect.position = get_parent().position - Vector2(left, top) - rect.size / 2
+	rect.position = get_parent().global_position - Vector2(left, top) - rect.size / 2
+	print("updating rect of {0} with rect {1}.".format([get_parent().name, rect]))
