@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Card Game Sim"
-run/main_scene="uid://cy8g4txkutixa"
+run/main_scene="uid://besgat1c0q0no"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameLoader="*res://Autoload/game_loader.gd"
+MouseDetectHandler="*res://Autoload/mouse_detect_handler.gd"
 
 [display]
 
