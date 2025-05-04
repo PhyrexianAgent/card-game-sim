@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameLoader="*res://Autoload/game_loader.gd"
 MouseDetectHandler="*res://Autoload/mouse_detect_handler.gd"
+ServerHandler="*res://Autoload/server_handler.gd"
 
 [display]
 
