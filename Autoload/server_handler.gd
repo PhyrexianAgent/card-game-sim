@@ -12,6 +12,11 @@ var player_name: String
 var sync_nodes: Dictionary
 # Is http requester that handles sending out http requests (1 for now)
 var requester: HTTPRequest = null : set = _set_http_requester
+# Dictionary of responses, keys are the response string, with callables for response. This makes Dictionary
+# data type the method to get responses from response types.
+var response_list := {
+	"cgs_auth_response_v1": server_handshake_response
+}
 
 # Sends actions in a packet to the http server
 func send_actions(actions: String) -> void:
@@ -28,6 +33,12 @@ func send_actions(actions: String) -> void:
 	
 # Will decide what to do with data sent from http server response.
 func decide_actions_from_response(data: Dictionary) -> void:
+	if response_list.has(data.data_format):
+		response_list[data.data_format].call(data)
+	else:
+		printerr("Unknown response format (%s)" % data.data_format)
+	
+func server_handshake_response(response: Dictionary) -> void:
 	pass
 
 # Will make sure when http requester is set, will connect the correct signal to it. Also will disconnect
