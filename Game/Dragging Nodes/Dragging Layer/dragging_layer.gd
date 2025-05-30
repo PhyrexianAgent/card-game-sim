@@ -33,6 +33,6 @@ func start_drag(master: Sprite2D) -> void:
 	
 # Will end the drag by sending http request for a card move and sending end drag signal
 func end_drag(master: Sprite2D, position: Vector2) -> void:
-	print("sending {0} to {1}".format([master.name, position]))
-	
+	#print("sending {0} to {1}".format([master.name, position]))
+	master.global_position = position
 	ending_drag.emit()

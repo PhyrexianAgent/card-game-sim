@@ -35,6 +35,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	update_position()
 	mouse_on_rect = rect.has_point(viewport.get_mouse_position())
 	update_mouse_on_rect()
 	
@@ -56,4 +57,8 @@ func update_rect() -> void:
 	var parent = get_parent()
 	var t_size = parent.texture.get_size() * parent.global_scale
 	rect.size = t_size - Vector2(left + right, top + bottom)
+	rect.position = parent.global_position - Vector2(left, top) - rect.size / 2
+	
+# Updates position of detection rect (assumes rect's size is the same)
+func update_position() -> void:
 	rect.position = get_parent().global_position - Vector2(left, top) - rect.size / 2
