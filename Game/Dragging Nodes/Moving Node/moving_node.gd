@@ -16,6 +16,7 @@ func _ready() -> void:
 	global_position = master.global_position
 	modulate = master.modulate
 	mouse_diff = get_global_mouse_position() - global_position
+	copy_visible_children()
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_released('drag_camera'):
@@ -24,3 +25,17 @@ func _input(event: InputEvent) -> void:
 		
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position() - mouse_diff
+	
+# Will copy children of sprite that are visible (sprites for now but will include others when needed)
+func copy_visible_children(sprite: Sprite2D = master, current_parent = self) -> void:
+	for child in sprite.get_children():
+		if child is Sprite2D:
+			var child_copy = Sprite2D.new()
+			child_copy.name = child.name
+			child_copy.position = child.position
+			child_copy.scale = child.scale
+			child_copy.texture = child.texture
+			child_copy.modulate = child.modulate
+			current_parent.add_child(child_copy)
+			if child.get_child_count() > 0:
+				copy_visible_children(child, child_copy)
