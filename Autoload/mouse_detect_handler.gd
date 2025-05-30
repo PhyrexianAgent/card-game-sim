@@ -94,7 +94,7 @@ func find_youngest_similar_parent(a: Node, b: Node) -> Node:
 	
 func _set_top_node(value) -> void:
 	if top_node != null: top_node.mouse_on = false
-	if value != top_node:
-		print("Top node is: %s" % (value.get_parent().name if value != null else "null"))
+	#if value != top_node:
+		#print("Top node is: %s" % (value.get_parent().name if value != null else "null"))
 	top_node = value
 	if top_node != null: top_node.mouse_on = true
