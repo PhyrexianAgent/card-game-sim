@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2uxp4q3a1jyt"]
+
+[ext_resource type="Script" uid="uid://bevx4q6nb5b4w" path="res://Game/Dragging Nodes/Dragging Layer/dragging_layer.gd" id="1_yvkvi"]
+[ext_resource type="PackedScene" uid="uid://kle1f6y3vy5j" path="res://Game/Dragging Nodes/Moving Node/moving_node.tscn" id="2_joige"]
+
+[node name="Dragging Layer" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_yvkvi")
+drag_node = ExtResource("2_joige")
