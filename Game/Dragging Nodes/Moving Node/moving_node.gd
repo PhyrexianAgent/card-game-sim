@@ -12,4 +12,9 @@ signal finished_drag(master, position)
 func _ready() -> void:
 	scale = master.scale
 	texture = master.texture
-	position = master.position
+	global_position = master.global_position
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_released('drag_camera'):
+		finished_drag.emit(master, global_position)
+		queue_free()

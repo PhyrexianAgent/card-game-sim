@@ -13,6 +13,8 @@ enum DragTypes{
 @export var card_back: Texture2D
 # Determines type of behaviour used when player is dragging stack
 @export var drag_type: DragTypes = DragTypes.ONLY_TOP_CARD
+# Distance needed to be considered being dragged
+@export var minimun_drag_start_distance: float = 5
 
 @onready var mouse_detector = $"Mouse Detector"
 
@@ -36,3 +38,7 @@ func _set_is_hidden(value: bool) -> void:
 func _ready() -> void:
 	if is_hidden:
 		texture = card_back
+		
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("drag_camera") and mouse_detector.mouse_on and not DraggingLayer.instance.is_dragging:
+		DraggingLayer.instance.start_drag(self)
