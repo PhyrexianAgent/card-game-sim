@@ -6,7 +6,14 @@ extends Sprite2D
 
 # Sprite this will look like and will ask the server to move if needed
 var master: Sprite2D
+# The initial difference between mouse position and object's position
 var mouse_diff: Vector2
+# To only need to get the current camera once.
+var camera: Camera2D
+# The actual position to send the object to. This is needed as with an added camera, I need the camera's
+# viewport to get proper mouse position, but oddly when using that it makes the moving node go to an improper
+# position.
+var actual_position: Vector2
 
 signal finished_drag(master, position)
 
@@ -15,16 +22,18 @@ func _ready() -> void:
 	texture = master.texture
 	global_position = master.global_position
 	modulate = master.modulate
-	mouse_diff = get_global_mouse_position() - global_position
+	camera = get_viewport().get_camera_2d()
+	mouse_diff = camera.get_global_mouse_position() - global_position
 	copy_visible_children()
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_released('drag_camera'):
-		finished_drag.emit(master, global_position)
+		finished_drag.emit(master, actual_position)
 		queue_free()
 		
 func _process(delta: float) -> void:
 	global_position = get_global_mouse_position() - mouse_diff
+	actual_position = camera.get_global_mouse_position() - mouse_diff
 	
 # Will copy children of sprite that are visible (sprites for now but will include others when needed)
 func copy_visible_children(sprite: Sprite2D = master, current_parent = self) -> void:

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://t3t0a4p3mg53"]
+
+[ext_resource type="Script" uid="uid://capwedyv5c53w" path="res://addons/Fantail-Interactive.top_down_camera/td_camera_2d.gd" id="1_o6sry"]
+
+[node name="Dragging Camera" type="Camera2D"]
+script = ExtResource("1_o6sry")

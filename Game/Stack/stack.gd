@@ -42,3 +42,6 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("drag_camera") and mouse_detector.mouse_on and not DraggingLayer.instance.is_dragging:
 		DraggingLayer.instance.start_drag(self)
+	if event.is_action_pressed("tester"):
+		mouse_detector.update_position()
+		print("updating position")

@@ -7,17 +7,23 @@ extends Node
 var nodes_under_mouse: Array
 # Stores detector that is under mouse with highest z index
 var top_node: MouseDetector = null : set = _set_top_node
+# Disables mouse on related stuff, used by camera to not drag objects with it.
+var disabled := false : set = _set_disabled
+
+var nothing_under_mouse: bool : get = _anything_under_mouse
 
 # Called by mouse detectors when mouse starts being on their parent
 func add_under_mouse(detector: MouseDetector) -> void:
-	if top_node == null:
+	if top_node == null and not disabled:
 		top_node = detector
-	else:
+	elif not disabled:
 		if is_node_on_top(detector, top_node):
 			nodes_under_mouse.append(top_node)
 			top_node = detector
 		else:
 			nodes_under_mouse.append(detector)
+	else:
+		nodes_under_mouse.append(detector)
 		
 # Called by mouse detectors when mouse ends being on their parent
 func remove_under_mouse(detector: MouseDetector) -> void:
@@ -98,3 +104,13 @@ func _set_top_node(value) -> void:
 		#print("Top node is: %s" % (value.get_parent().name if value != null else "null"))
 	top_node = value
 	if top_node != null: top_node.mouse_on = true
+	
+func _set_disabled(value: bool) -> void:
+	disabled = value
+	if disabled:
+		top_node = null
+	else:
+		find_new_top_node()
+		
+func _anything_under_mouse() -> bool:
+	return top_node == null and nodes_under_mouse.size() == 0

@@ -5,6 +5,8 @@ enum ResizingTypes{
 	FIXED_SIZE, PARENT_SPRITE
 }
 
+static var camera_viewport: Viewport = null
+
 @export var size_type := ResizingTypes.PARENT_SPRITE
 @export_group("Padding")
 @export var left: float
@@ -12,8 +14,8 @@ enum ResizingTypes{
 @export var top: float
 @export var bottom: float
 
-# Current viewport (so I dont have to keep calling get_viewport() repeatingly)
-@onready var viewport := get_viewport()
+# Current camera (so I dont have to keep calling get_viewport().get_camera_2d() repeatingly)
+@onready var current_camera := get_viewport().get_camera_2d()
 
 # Rect which covers where the sprite is on the object. Used to check if point inside rect.
 var rect := Rect2()
@@ -36,7 +38,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_position()
-	mouse_on_rect = rect.has_point(viewport.get_mouse_position())
+	mouse_on_rect = rect.has_point(current_camera.get_global_mouse_position())#get_mouse_position())
 	update_mouse_on_rect()
 	
 func _set_mouse_on_rect(value: bool) -> void:
@@ -48,7 +50,7 @@ func _set_mouse_on_rect(value: bool) -> void:
 	mouse_on_rect = value
 		
 func update_mouse_on_rect() -> void:
-	var rect_has_mouse := rect.has_point(viewport.get_mouse_position())
+	var rect_has_mouse := rect.has_point(current_camera.get_global_mouse_position())
 	if mouse_on_rect != rect_has_mouse:
 		mouse_on_rect = rect_has_mouse
 	

@@ -36,9 +36,9 @@ var move_right := false
 var move_up := false
 var move_down := false
 
-
 func _ready() -> void:
 	# We want the camera to move when we set position
+	MouseDetector.camera_viewport = get_viewport()
 	set_drag_horizontal_enabled(false)
 	set_drag_vertical_enabled(false)
 
@@ -99,8 +99,9 @@ func _process(delta: float) -> void:
 ## i.e. the camera won't move if the player is moving through menus
 func _unhandled_input(event: InputEvent) -> void:
 	# TODO: Change to input action
-	if event.is_action(drag_action):
-		dragging = event.is_pressed()
+	if event.is_action(drag_action):# and MouseDetectHandler.nothing_under_mouse:
+		dragging = event.is_pressed() and MouseDetectHandler.nothing_under_mouse
+		MouseDetectHandler.disabled = dragging
 		return
 
 	# Transform a key change event into a "pressed" flag.

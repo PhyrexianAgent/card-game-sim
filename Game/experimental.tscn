@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://besgat1c0q0no"]
+[gd_scene load_steps=5 format=3 uid="uid://besgat1c0q0no"]
 
 [ext_resource type="PackedScene" uid="uid://cdvyujbf2cwl7" path="res://Game/Stack/stack.tscn" id="1_cx5mc"]
 [ext_resource type="PackedScene" uid="uid://dim5vk6v0d2gh" path="res://Game/Dragging Nodes/Drag Modulate/drag_modulate.tscn" id="2_ya8im"]
 [ext_resource type="PackedScene" uid="uid://d2uxp4q3a1jyt" path="res://Game/Dragging Nodes/Dragging Layer/dragging_layer.tscn" id="3_hgmfy"]
+[ext_resource type="PackedScene" uid="uid://t3t0a4p3mg53" path="res://Game/dragging_camera.tscn" id="4_sgx67"]
 
 [node name="Experimental" type="Node2D"]
 
@@ -29,3 +30,6 @@ position = Vector2(-7.09957, 25.8621)
 [node name="Stack Drag Modulate" parent="." instance=ExtResource("2_ya8im")]
 
 [node name="Dragging Layer" parent="." instance=ExtResource("3_hgmfy")]
+
+[node name="Dragging Camera" parent="." instance=ExtResource("4_sgx67")]
+position = Vector2(793, 456)
