@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ContextMenuData" load_steps=5 format=3 uid="uid://4ageoiko3dlu"]
+
+[ext_resource type="Script" uid="uid://62n7232bjnmb" path="res://Resources/Contect Menu Initializer/context_item_data.gd" id="1_x823m"]
+[ext_resource type="Script" uid="uid://ccby1cfdevnqp" path="res://Resources/Contect Menu Initializer/context_menu_data.gd" id="2_xbjga"]
+
+[sub_resource type="Resource" id="Resource_l7apu"]
+script = ExtResource("1_x823m")
+type = 0
+text = "Remove"
+id = 0
+metadata/_custom_type_script = "uid://62n7232bjnmb"
+
+[sub_resource type="Resource" id="Resource_8v8f5"]
+script = ExtResource("1_x823m")
+type = 0
+text = "Add Text"
+id = 0
+metadata/_custom_type_script = "uid://62n7232bjnmb"
+
+[resource]
+script = ExtResource("2_xbjga")
+start_visible = false
+hide_from_item_selection = true
+hide_from_checkable_selection = true
+items = Array[ExtResource("1_x823m")]([SubResource("Resource_l7apu"), SubResource("Resource_8v8f5")])
+metadata/_custom_type_script = "uid://ccby1cfdevnqp"

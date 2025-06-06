@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://08gocwtwt24h"]
+
+[ext_resource type="Script" uid="uid://duo3e167mfdmr" path="res://Game/Context Menu/context_menu.gd" id="1_bfo2y"]
+[ext_resource type="Resource" uid="uid://4ageoiko3dlu" path="res://Game/Context Menu/base_stack_menu_data.tres" id="2_wyby0"]
+
+[node name="Context Menu" type="PopupMenu"]
+visible = true
+unfocusable = true
+script = ExtResource("1_bfo2y")
+initial_menu_data = ExtResource("2_wyby0")
